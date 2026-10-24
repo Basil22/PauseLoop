@@ -6,10 +6,21 @@ import type { ConfigContext, ExpoConfig } from 'expo/config';
  */
 const IS_PRODUCTION = process.env.EAS_BUILD_PROFILE === 'production';
 
+// Permissions added by the Expo template or libraries that PauseLoop does not
+// need. Removing them keeps the store manifest and privacy story honest.
+const BLOCKED_PERMISSIONS = [
+  'android.permission.READ_EXTERNAL_STORAGE',
+  'android.permission.WRITE_EXTERNAL_STORAGE',
+  'android.permission.VIBRATE',
+  // The dev client needs INTERNET for Metro. The production release must not.
+  ...(IS_PRODUCTION ? ['android.permission.INTERNET'] : []),
+];
+
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: 'PauseLoop',
   slug: 'pauseloop',
+  owner: 'basil-rs-team',
   description: 'Break the loop. A private, on-device pause from doomscrolling.',
   version: '0.1.0',
   platforms: ['android', 'web'],
@@ -29,7 +40,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       monochromeImage: './assets/images/android-icon-monochrome.png',
     },
     // The dev client needs INTERNET for Metro. The production release must not.
-    blockedPermissions: IS_PRODUCTION ? ['android.permission.INTERNET'] : [],
+    blockedPermissions: BLOCKED_PERMISSIONS,
   },
   web: {
     bundler: 'metro',
@@ -47,6 +58,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       },
     ],
   ],
+  extra: {
+    eas: {
+      projectId: '5aedf00e-8bca-460c-b79c-769336c9991d',
+    },
+  },
   experiments: {
     typedRoutes: true,
   },
