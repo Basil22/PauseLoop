@@ -1,0 +1,9 @@
+expo.modules.pauseloopnative.pauseloop-native-pngs-0 C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\build\generated\res\pngs\release
+expo.modules.pauseloopnative.pauseloop-native-updated_navigation_xml-1 C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\build\generated\updated_navigation_xml\release
+expo.modules.pauseloopnative.pauseloop-native-mergeReleaseResources-2 C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\build\intermediates\incremental\release\mergeReleaseResources\merged.dir
+expo.modules.pauseloopnative.pauseloop-native-mergeReleaseResources-3 C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\build\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+expo.modules.pauseloopnative.pauseloop-native-release-4 C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\build\intermediates\merged_res\release\mergeReleaseResources
+expo.modules.pauseloopnative.pauseloop-native-release-5 C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\build\intermediates\packaged_res\release\packageReleaseResources
+expo.modules.pauseloopnative.pauseloop-native-main-6 C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\res
+expo.modules.pauseloopnative.pauseloop-native-release-7 C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\release\res
+gradleHome-0 C:\Users\basil\.gradle

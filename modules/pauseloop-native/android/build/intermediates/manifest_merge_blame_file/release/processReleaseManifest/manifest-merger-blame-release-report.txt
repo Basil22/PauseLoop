@@ -1,0 +1,102 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    xmlns:tools="http://schemas.android.com/tools"
+4    package="expo.modules.pauseloopnative" >
+5
+6    <uses-sdk android:minSdkVersion="24" />
+6-->INJECTED
+6-->INJECTED
+7
+8    <uses-permission
+8-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:4:3-6:45
+9        android:name="android.permission.PACKAGE_USAGE_STATS"
+9-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:5:7-60
+10        tools:ignore="ProtectedPermissions" />
+10-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:6:7-42
+11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+11-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:7:3-76
+11-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:7:20-73
+12    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+12-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:8:3-75
+12-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:8:20-72
+13    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+13-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:9:3-87
+13-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:9:20-84
+14    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+14-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:10:3-75
+14-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:10:20-72
+15    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+15-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:11:3-79
+15-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:11:20-76
+16
+17    <!-- Guarantee that no library smuggles in the restricted all-packages access. -->
+18    <uses-permission
+18-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:14:3-16:29
+19        android:name="android.permission.QUERY_ALL_PACKAGES"
+19-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:15:7-59
+20        tools:node="remove" />
+20-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:16:7-26
+21
+22    <queries>
+22-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:18:3-28:13
+23        <intent>
+23-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:19:5-22:14
+24            <action android:name="android.intent.action.MAIN" />
+24-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:20:7-59
+24-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:20:15-56
+25
+26            <category android:name="android.intent.category.LAUNCHER" />
+26-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:21:7-67
+26-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:21:17-64
+27        </intent>
+28        <!-- Used only to avoid drawing the test reminder over the launcher. -->
+29        <intent>
+29-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:24:5-27:14
+30            <action android:name="android.intent.action.MAIN" />
+30-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:20:7-59
+30-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:20:15-56
+31
+32            <category android:name="android.intent.category.HOME" />
+32-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:26:7-63
+32-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:26:17-60
+33        </intent>
+34    </queries>
+35
+36    <application>
+36-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:30:3-49:17
+37        <service
+37-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:31:5-39:15
+38            android:name="expo.modules.pauseloopnative.MonitoringService"
+38-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:32:9-70
+39            android:exported="false"
+39-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:33:9-33
+40            android:foregroundServiceType="specialUse"
+40-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:35:9-51
+41            android:stopWithTask="false" >
+41-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:34:9-37
+42            <property
+42-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:36:7-38:80
+43                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+43-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:37:11-70
+44                android:value="digital_wellbeing_monitoring_of_user_selected_apps" />
+44-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:38:11-77
+45        </service>
+46
+47        <receiver
+47-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:41:5-48:16
+48            android:name="expo.modules.pauseloopnative.BootReceiver"
+48-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:42:9-65
+49            android:enabled="true"
+49-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:43:9-31
+50            android:exported="true" >
+50-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:44:9-32
+51            <intent-filter>
+51-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:45:7-47:23
+52                <action android:name="android.intent.action.BOOT_COMPLETED" />
+52-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:46:9-71
+52-->C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:46:17-68
+53            </intent-filter>
+54        </receiver>
+55    </application>
+56
+57</manifest>

@@ -1,0 +1,100 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:1:1-50:12
+INJECTED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:1:1-50:12
+	package
+		INJECTED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml
+	xmlns:tools
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:2:5-51
+	xmlns:android
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:1:11-69
+uses-permission#android.permission.PACKAGE_USAGE_STATS
+ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:4:3-6:45
+	tools:ignore
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:6:7-42
+	android:name
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:5:7-60
+uses-permission#android.permission.SYSTEM_ALERT_WINDOW
+ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:7:3-76
+	android:name
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:7:20-73
+uses-permission#android.permission.FOREGROUND_SERVICE
+ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:8:3-75
+	android:name
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:8:20-72
+uses-permission#android.permission.FOREGROUND_SERVICE_SPECIAL_USE
+ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:9:3-87
+	android:name
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:9:20-84
+uses-permission#android.permission.POST_NOTIFICATIONS
+ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:10:3-75
+	android:name
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:10:20-72
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:11:3-79
+	android:name
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:11:20-76
+uses-permission#android.permission.QUERY_ALL_PACKAGES
+ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:14:3-16:29
+	tools:node
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:16:7-26
+	android:name
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:15:7-59
+queries
+ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:18:3-28:13
+intent#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:19:5-22:14
+action#android.intent.action.MAIN
+ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:20:7-59
+	android:name
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:20:15-56
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:21:7-67
+	android:name
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:21:17-64
+intent#action:name:android.intent.action.MAIN+category:name:android.intent.category.HOME
+ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:24:5-27:14
+category#android.intent.category.HOME
+ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:26:7-63
+	android:name
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:26:17-60
+application
+ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:30:3-49:17
+service#expo.modules.pauseloopnative.MonitoringService
+ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:31:5-39:15
+	android:exported
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:33:9-33
+	android:stopWithTask
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:34:9-37
+	android:foregroundServiceType
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:35:9-51
+	android:name
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:32:9-70
+property#android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE
+ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:36:7-38:80
+	android:value
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:38:11-77
+	android:name
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:37:11-70
+receiver#expo.modules.pauseloopnative.BootReceiver
+ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:41:5-48:16
+	android:enabled
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:43:9-31
+	android:exported
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:44:9-32
+	android:name
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:42:9-65
+intent-filter#action:name:android.intent.action.BOOT_COMPLETED
+ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:45:7-47:23
+action#android.intent.action.BOOT_COMPLETED
+ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:46:9-71
+	android:name
+		ADDED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml:46:17-68
+uses-sdk
+INJECTED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml
+INJECTED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\basil\OneDrive\Documents\GitHub Projects\PauseLoop\modules\pauseloop-native\android\src\main\AndroidManifest.xml
