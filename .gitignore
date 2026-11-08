@@ -27,6 +27,16 @@ expo-env.d.ts
 npm-debug.*
 yarn-debug.*
 yarn-error.*
+*.log
+test-results/
+playwright-report/
+gradle-test-final.log
+release-build.log
+release-build-short.log
+install-ndk.log
+install-cmake.log
+rerun-test.log
+java-procs.txt
 
 # macOS
 .DS_Store

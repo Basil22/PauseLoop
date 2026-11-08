@@ -4,7 +4,7 @@
 
 PauseLoop is an Android-only digital-wellbeing app. After a stretch of scrolling in a selected app, it covers the screen with a calm, native reminder. You can close the app and go Home, or snooze twice. It is friction, not parental control: no account, no cloud, no screen capture, no Accessibility service.
 
-**Current status:** Phase 0 — scaffold and native feasibility. The app, native module, debug harness, and preview build are implemented. Static checks pass. The EAS development build and the OnePlus test matrix are the remaining gate items; see [docs/phase-0-results.md](./docs/phase-0-results.md).
+**Current status:** Phase 1 Reminder MVP implemented and locally verified. See [docs/phase-1-results.md](./docs/phase-1-results.md) for the implementation report, test evidence, release artifact, deviations, and the remaining physical-device checklist.
 
 ---
 
