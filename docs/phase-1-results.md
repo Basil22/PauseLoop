@@ -1,7 +1,10 @@
 # PauseLoop — Phase 1 Results
 
+> **Historical report.** Current HEAD may not contain the full implementation.  
+> This document records the Phase 1 work at the time it was completed. Some commands and paths changed during the repository cleanup.
+
 **Date:** 2026-11-08  
-**Scope:** Full Phase 1 Reminder MVP (not the narrower tracking-only note in `docs/phase-1-onboarding.md`)  
+**Scope:** Full Phase 1 Reminder MVP  
 **Status:** Implemented and locally verified. Physical-device validation remains pending because no Android device was attached.
 
 ---
@@ -13,7 +16,7 @@
 - **Welcome** onboarding with privacy model, three-step explanation, and no-account messaging.
 - **Choose apps** onboarding with search, suggested social/video apps first, all other launchable apps below, at least one required, and PauseLoop excluded.
 - **Permissions** onboarding for Usage Access, Display over other apps, and Notifications, with per-permission explanation, system-settings buttons, resume re-checking, and optional battery guidance.
-- **Dashboard** with monitoring status, session progress, selected-app count, permission health, start/stop, app picker and settings links, plus local-only privacy entry.
+- **Dashboard** with monitoring status, session progress, selected-app count, permission health, start/stop, and a debug entry, plus a local-only privacy summary.
 - **Settings** with 1–120 minute interval, suggestions toggle, local-insights toggle, permission health, privacy controls, and snooze/cooldown explanations.
 - **Privacy & data** screen with local-only statement, storage controls, history summary, and clear-history action.
 - **App picker** screen for editing the selected loop list after onboarding.
@@ -66,15 +69,15 @@
 | UI | `src/app/onboarding/`, `src/app/index.tsx`, `apps.tsx`, `settings.tsx`, `privacy.tsx`, `debug.tsx` |
 | Shared UI | `src/components/` |
 | Hooks/state | `src/hooks/` |
-| Web smoke | `tests/web/serve.mjs`, `tests/web/smoke.mjs`, `tests/web/text-scale.mjs` |
+| Web preview mock | `modules/pauseloop-native/src/PauseLoopNativeModule.web.ts`, `.../mock.ts` |
 
 ### Design decisions and deviations
 
 1. **SQLiteOpenHelper instead of Room.** The plan names Room, but the schema is two small tables and the MVP benefits from zero annotation processing/KSP. `LocalUsageStore` implements the same `daily_usage` and `daily_summary` fields, a versioned schema, and 90-day pruning.
-2. **No `expo-dev-client`.** Phase 1 ships a standalone release. Removing the dev client, Reanimated, Gesture Handler, and Worklets reduced native surface and APK size. Debug work now uses a normal debug build or the web preview.
-3. **Release is network-free.** `app.config.ts` blocks `INTERNET` unless an explicit development profile is set; the generated manifest was also verified to omit it.
+2. **No `expo-dev-client`.** Phase 1 ships a standalone release. The dev client was removed and the start scripts now use plain Expo commands. Reanimated, Gesture Handler, and Worklets remain only as optional Expo Router peers with no direct imports; they were restored because the cleanup verification gate failed on unrelated Expo SDK patch drift. Debug work uses a normal debug build or the web preview.
+3. **Release is network-free.** `app.config.ts` blocks `INTERNET` when `EAS_BUILD_PROFILE=production`; preview and development builds keep it for Metro. The generated release manifest was also verified to omit it.
 4. **arm64-only release APK.** The local deliverable targets current physical Android phones and avoids four-ABI bulk. This is a deliverable choice, not a Play Store AAB requirement.
-5. **Local release keystore.** The checked-in build config expects `android/app/pauseloop-release.keystore` (generated locally, ignored by git). It is a development signing identity only and must be replaced before Play upload.
+5. **Local release keystore.** The generated native build config expects a local keystore (filename and password are chosen locally and are not committed). It is a development signing identity only and must be replaced before Play upload.
 
 ---
 
@@ -86,10 +89,10 @@ Command:
 
 ```bat
 cd android
-build-check.bat :pauseloop-native:testDebugUnitTest --no-daemon
+gradlew.bat :pauseloop-native:testDebugUnitTest --no-daemon --console=plain
 ```
 
-Result: **14/14 tests passed, BUILD SUCCESSFUL**.
+Run this from the generated `android/` project in a Windows shell with JDK 21. Result: **14/14 tests passed, BUILD SUCCESSFUL**.
 
 Coverage includes accumulation, app switching, away-gap reset, screen-off/lock, threshold reminder, exactly two snoozes, cooldown sharing, cooldown expiry, interval changes, overlay failure recovery, and reboot restore.
 
@@ -109,8 +112,8 @@ Coverage includes interval clamping, package normalization/deduplication/capping
 
 Command:
 
-```bat
-typecheck.bat
+```bash
+npm run typecheck
 ```
 
 Result: **exit 0, zero TypeScript errors**.
@@ -119,48 +122,33 @@ Result: **exit 0, zero TypeScript errors**.
 
 Command:
 
-```bat
-export-web.bat
-```
-
-Result: export succeeded; `dist/` generated with all route bundles.
-
-### 3.5 Browser smoke matrix
-
-Prerequisite (not bundled with the app):
-
 ```bash
-npm install --no-save playwright
-npx playwright install chromium
+npm run export:web
 ```
 
-Command:
+Result: export succeeded; `dist/` generated with all route bundles. This remains reproducible from the current tree.
 
-```bash
-node tests/web/smoke.mjs
-```
+### 3.5 Browser smoke matrix (historical)
 
-Result: **PASS 6/6** contexts — dark/light × 320/375/430 px. Covers onboarding, app selection, permissions, dashboard, monitoring start, settings, privacy, app list, navigation, console errors, and horizontal overflow.
+**Not reproducible from current HEAD.** The Playwright web tests and helper scripts in `tests/web/` were deleted during repository cleanup, and Playwright is not a dependency.
 
-### 3.6 200% text scaling matrix
+Recorded result: **PASS 6/6** contexts — dark/light × 320/375/430 px. Covered onboarding, app selection, permissions, dashboard, monitoring start, settings, privacy, app list, navigation, console errors, and horizontal overflow.
 
-Command:
+### 3.6 200% text scaling matrix (historical)
 
-```bash
-node tests/web/text-scale.mjs
-```
+**Not reproducible from current HEAD** for the same reason.
 
-Result: **PASS 42/42** screen checks — 6 contexts × 7 screens at simulated 200% font size, with no horizontal overflow. Screenshots are written to `/tmp/pauseloop-web`.
+Recorded result: **PASS 42/42** screen checks — 6 contexts × 7 screens at simulated 200% font size, with no horizontal overflow. Screenshots were written to `/tmp/pauseloop-web`.
 
 ### 3.7 Release APK audit
 
-> Fill this section from the release build results below.
+Not recorded in this report. The release build was performed locally; its artifact details were not captured here and the artifact is not committed.
 
 ---
 
 ## 4. Release artifact
 
-> Path, size, checksum, signing certificate, and manifest findings go here after the build.
+Not committed. The release APK, signing key, and ProGuard mapping were local-only build outputs. The generated `android/` project must be recreated with Expo prebuild before rebuilding.
 
 ---
 
@@ -195,31 +183,26 @@ Suggested device runbook:
 
 ## 6. Reproduce
 
+Current checks:
+
 ```bash
 npm install
-npm run test:js
 npm run typecheck
+npm run test:js
 npm run export:web
-node tests/web/serve.mjs
-# in another shell
-node tests/web/smoke.mjs
-node tests/web/text-scale.mjs
 ```
 
-Native tests and release build (Windows JDK 21):
+The Playwright smoke and text-scale suites are no longer available; see §3.5–3.6.
+
+Native tests and release build (Windows JDK 21, from the generated `android/` project):
 
 ```bat
 cd android
-build-check.bat :pauseloop-native:testDebugUnitTest --no-daemon
-build-check.bat :app:assembleRelease --no-daemon
+gradlew.bat :pauseloop-native:testDebugUnitTest --no-daemon --console=plain
+gradlew.bat :app:assembleRelease --no-daemon --console=plain
 ```
 
-Local keystore generation (already done for this build):
-
-```bat
-cd android
-gen-keystore.bat
-```
+Local keystore generation is described in §7; the keystore and its password are not committed.
 
 ---
 
@@ -243,15 +226,15 @@ The `android/` folder is intentionally gitignored and was generated with Expo pr
    expo.webp.enabled=false
    ```
 
-3. In `android/app/build.gradle`, add a `release` signing config pointing at `pauseloop-release.keystore` and use it in `buildTypes.release`. Keep `shrinkResources`, `minifyEnabled`, and `crunchPngs` enabled.
+3. In `android/app/build.gradle`, add a `release` signing config pointing at your local keystore (for example, `release.keystore`) and use it in `buildTypes.release`. Keep `shrinkResources`, `minifyEnabled`, and `crunchPngs` enabled.
 
-4. Create the local keystore (replace the password/alias for any real distribution):
+4. Create the local keystore (replace the placeholders for any real distribution):
 
    ```bat
    keytool -genkeypair -v -storetype PKCS12 ^
-     -keystore android\app\pauseloop-release.keystore ^
+     -keystore android\app\release.keystore ^
      -alias pauseloop -keyalg RSA -keysize 2048 -validity 10000 ^
-     -storepass pauseloop-release -keypass pauseloop-release ^
+     -storepass <local-password> -keypass <local-password> ^
      -dname "CN=PauseLoop Release, OU=Mobile, O=PauseLoop, L=Local, ST=Local, C=IN"
    ```
 
@@ -259,7 +242,7 @@ The `android/` folder is intentionally gitignored and was generated with Expo pr
 
    ```bat
    cd android
-   build-check.bat :app:assembleRelease --no-daemon
+   gradlew.bat :app:assembleRelease --no-daemon --console=plain
    ```
 
 The NDK must be complete. This machine initially had a truncated NDK 27.1 with a 22 MB sysroot and no `usr/lib`; reinstall it with `sdkmanager --install "ndk;27.1.12297006"` if CMake reports missing `crtbegin_dynamic.o`, `libm`, or `libc`.
@@ -273,3 +256,6 @@ The NDK must be complete. This machine initially had a truncated NDK 27.1 with a
 - SQLiteOpenHelper deviation from the plan's Room choice is intentional and documented above.
 - The web build uses an in-memory mock; it validates layout and flows, not native monitoring.
 - `INTERNET` is intentionally absent; the release build cannot load remote JS or send analytics.
+- The Playwright web tests were removed during cleanup; only the TypeScript helper tests remain.
+- The dashboard still carries some Phase 0 labels, and the app picker/settings routes are not linked from it.
+- `npx expo-doctor` reports SDK patch-version drift; the installed packages are older than the latest SDK 58 patches.

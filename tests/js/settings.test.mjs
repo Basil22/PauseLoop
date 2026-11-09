@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { Buffer } from 'node:buffer';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import test from 'node:test';
@@ -18,7 +19,7 @@ const compiled = ts.transpileModule(source, {
 }).outputText;
 
 const settings = await import(
-  `data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`
+  `data:text/javascript;base64,${Buffer.from(compiled, 'utf-8').toString('base64')}`
 );
 
 test('clampReminderInterval keeps intervals inside 1..120 and rounds', () => {

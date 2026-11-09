@@ -1,5 +1,0 @@
-int drawable ic_stat_pauseloop 0x0
-int font manrope_bold 0x0
-int font manrope_extrabold 0x0
-int font manrope_regular 0x0
-int font manrope_semibold 0x0

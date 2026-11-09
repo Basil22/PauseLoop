@@ -54,3 +54,15 @@ example
 # generated native folders
 /ios
 /android
+
+# native module build outputs
+modules/**/android/build/
+modules/**/android/.gradle/
+modules/**/android/.cxx/
+
+# signing material
+*.keystore
+
+# tool caches
+.eslintcache
+coverage/

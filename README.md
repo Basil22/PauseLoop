@@ -2,83 +2,118 @@
 
 **Break the loop. Take the pause.**
 
-PauseLoop is an Android-only digital-wellbeing app. After a stretch of scrolling in a selected app, it covers the screen with a calm, native reminder. You can close the app and go Home, or snooze twice. It is friction, not parental control: no account, no cloud, no screen capture, no Accessibility service.
+PauseLoop is an Android digital-wellbeing app. After a stretch of scrolling in a selected app,
+it covers the screen with a calm, native reminder. You can close the app and go Home, or snooze
+twice. It is friction, not parental control: no account, no cloud, no screen capture, no
+Accessibility service.
 
-**Current status:** Phase 1 Reminder MVP implemented and locally verified. See [docs/phase-1-results.md](./docs/phase-1-results.md) for the implementation report, test evidence, release artifact, deviations, and the remaining physical-device checklist.
+**Current status:** The Phase 1 Reminder MVP is implemented in this working tree, including the
+native Kotlin session engine and bridge. TypeScript and Kotlin tests pass locally. Physical-device
+validation on Android is still pending. Some dashboard labels still read Phase 0, and the app
+picker/settings routes are not linked from the dashboard. See
+[docs/phase-1-results.md](./docs/phase-1-results.md) for the implementation report, test evidence,
+deviations, and the device checklist.
+
+**Platform:** Android is the product. The web build is a preview/test target only; permissions,
+monitoring, and the overlay are simulated there.
 
 ---
 
-## What works in Phase 0
+## What is implemented
 
-- **Expo SDK 58 + TypeScript + Expo Router** with a typed native bridge.
-- **Permission health** for Usage Access, Display over other apps, notifications, and battery optimization, with deep links to the exact Android settings screens.
-- **Native full-screen reminder** drawn with Android `WindowManager` views. It consumes Back, stays out of the way of Home/notifications, handles insets/cutouts, and uses the Manrope brand fonts.
-- **Foreground monitoring service** with a quiet ongoing notification, `specialUse` foreground-service type, polling, screen/keyguard handling, and boot restore where Android permits it.
-- **Launcher app discovery** with a scoped `<queries>` intent, lazy icon loading, sorting, and no `QUERY_ALL_PACKAGES`.
-- **Still-supported preview mode** on web/Expo Go. Permission and monitoring behavior is simulated and clearly labeled, so the UI can be reviewed without a native build.
-- **Debug diagnostics** with permission state, service state, foreground package/activity, and the YouTube `UsageEvents` spike log.
-
-Phase 1 onboarding does **not** start until the Phase 0 gate passes.
+- **Onboarding** — welcome/privacy explanation, searchable app selection with suggestions, and
+  per-permission guidance for Usage Access, Display over other apps, and notifications.
+- **Dashboard** — monitoring state, session progress, selected-app count, permission health,
+  start/stop, and the debug entrance.
+- **Settings** — 1–120 minute reminder interval, suggestion toggle, local-insights toggle,
+  cooldown/snooze explanations, and permission health.
+- **Privacy & data** — local-only statement, stored-day/history summary, 90-day retention, and a
+  clear-history action.
+- **App picker route** — edit the selected loop list after onboarding.
+- **Debug screen** — service/overlay/foreground diagnostics, test reminder, and a debug-only
+  10-second threshold override that release builds reject.
+- **Native session engine** — cumulative session across selected apps, monotonic elapsed-time
+  accumulation, five-minute away-gap reset, screen-off/lock handling, threshold reminder, two
+  five-minute snoozes, and a shared five-minute cooldown.
+- **Android monitoring** — foreground `specialUse` service, `UsageStatsManager` package/activity
+  detection, native `WindowManager` overlay, boot restore where Android permits, and
+  permission-revocation shutdown.
+- **Local storage** — settings and session state in `SharedPreferences`; selected-app daily
+  aggregates in a local SQLite database with 90-day retention.
+- **App discovery** — launcher-intent queries and scoped package visibility, with no
+  `QUERY_ALL_PACKAGES`.
+- **Web preview** — in-memory mock with a clearly labeled preview mode.
 
 ---
 
 ## Requirements
 
 - Node.js 20+ and npm.
-- For real Android testing: an EAS account and the OnePlus 10 Pro running Android 16.
-- For local native compilation only: Android Studio / Android SDK and `adb`. Not required for the EAS workflow.
+- For native Android work: Android Studio / Android SDK, JDK 21, and `adb`.
+- For physical-device validation: an Android phone (the current target is a OnePlus 10 Pro on
+  Android 16).
+- EAS CLI and an Expo account only if you use cloud builds.
 
-The project deliberately has no `android/` or `ios/` directory. Expo Continuous Native Generation builds them during the EAS build. Do not commit generated native folders.
+Native `android/` and `ios/` folders are generated by Expo prebuild. They are gitignored and must
+not be committed.
 
 ---
 
-## Local checks and preview
+## Local checks and web preview
 
 ```bash
 npm install
 npm run typecheck
 npm run lint
+npm run test:js
 npm run export:web
 npm run web
 ```
 
-`npm run web` opens the preview at the Expo dev server URL. Native permissions, the overlay, and the foreground service are simulated there and labeled **Preview mode**. The full-screen React Native reminder preview is available from the home screen after starting simulated monitoring.
-
-Useful scripts:
+`npm run web` opens the preview; native permissions, the overlay, and the foreground service are
+simulated and labeled **Preview mode**. `npm run export:web` writes a static export to `dist/`.
 
 | Command | Purpose |
 |---|---|
-| `npm run start` | Start Metro for the installed development build |
-| `npm run android` | Start Metro and try to open Android (needs `adb`) |
+| `npm run start` | Start the Expo/Metro dev server |
+| `npm run android` | Start Metro and try to open Android (the native module still needs an installed build) |
 | `npm run web` | Web preview / UI review |
 | `npm run typecheck` | Strict TypeScript check |
 | `npm run lint` | Expo ESLint config |
+| `npm run test:js` | TypeScript helper tests (`node --test`) |
 | `npm run export:web` | Static web export in `dist/` |
 
 ---
 
-## EAS development build
+## Android builds
 
-The native Kotlin module must be compiled into an APK. Expo Go cannot load it.
+The native Kotlin module must be compiled into an APK; Expo Go cannot load it.
 
-```bash
-npx eas-cli@latest login
-npx eas-cli@latest init          # creates the EAS project; commit extra.eas.projectId
-npx eas-cli@latest build -p android --profile development
-```
-
-Install the APK on the phone, then connect it to Metro from WSL:
+Local build (generates `android/` first):
 
 ```bash
-npx expo start --dev-client --tunnel
+npx expo prebuild --platform android
+cd android
+./gradlew :app:assembleDebug
 ```
 
-- Use `--tunnel` for WSL2. It works regardless of LAN/firewall settings.
-- Native Kotlin changes require another EAS build. Batch them.
-- The development build keeps `INTERNET` for Metro. The `production` profile blocks `android.permission.INTERNET` via `app.config.ts`; all profiles also block unused storage and `VIBRATE` permissions.
-- `autoIncrement` keeps version codes moving so reinstalls update rather than fail.
+On Windows, use `gradlew.bat :app:assembleDebug`. For a release build, configure a local signing
+key as described in [docs/phase-1-results.md](./docs/phase-1-results.md) and run
+`:app:assembleRelease`.
 
-The full build/install runbook, OnePlus battery guidance, and troubleshooting table are in [docs/PAUSELOOP-HANDOFF.md](./docs/PAUSELOOP-HANDOFF.md), sections 13–14.
+EAS cloud builds:
+
+```bash
+npx eas-cli@latest build -p android --profile preview      # internal APK
+npx eas-cli@latest build -p android --profile production   # Play AAB
+```
+
+The project no longer uses `expo-dev-client`. The `development` EAS profile still sets
+`developmentClient: true`; re-add `expo-dev-client` before using that profile. The preview and
+production profiles are the supported release paths.
+
+Release builds block `android.permission.INTERNET`; development builds keep it for Metro. All
+profiles block unused storage and `VIBRATE` permissions.
 
 ---
 
@@ -86,21 +121,33 @@ The full build/install runbook, OnePlus battery guidance, and troubleshooting ta
 
 ```text
 PauseLoop/
-  src/app/                 # Expo Router screens (index, debug)
+  src/app/
+    _layout.tsx            # Root layout and providers
+    index.tsx              # Dashboard
+    apps.tsx               # App picker
+    settings.tsx           # Settings
+    privacy.tsx            # Privacy & data
+    debug.tsx              # Diagnostics
+    onboarding/
+      index.tsx            # Welcome
+      apps.tsx             # Choose loop apps
+      permissions.tsx      # Permission setup
   src/components/          # Theme-aware UI primitives and reminder preview
-  src/hooks/               # Permissions, monitoring, diagnostics, app icons
+  src/hooks/               # Permissions, monitoring, session, diagnostics, history
   src/lib/                 # Native bridge wrapper and formatting helpers
   src/theme/               # Dark-first tokens, light theme, typography
-  modules/pauseloop-native # Local Expo module (TypeScript + Kotlin)
-    android/               # Manifest, foreground service, overlay, DI helpers
+  modules/pauseloop-native/
     src/                   # Typed bridge, web mock, shared types
-  assets/images/           # Custom brand icon, adaptive icon, splash, favicon
-  docs/                    # Handoff snapshot and Phase 0 results template
-  app.config.ts            # Dynamic Expo config (production permission policy)
-  eas.json                 # development / preview / production profiles
+    android/               # Manifest, service, overlay, session engine, tests
+  tests/js/                # TypeScript helper tests (Node test runner)
+  assets/images/           # Brand icon, adaptive icon, splash, favicon
+  docs/                    # Phase reports and font license
+  app.config.ts            # Dynamic Expo config and permission policy
+  eas.json                 # preview / production release profiles
 ```
 
-Theme tokens are in `src/theme/index.tsx`. Brand assets were generated for PauseLoop and replace the Expo template assets. Manrope is bundled for the React Native UI and the native overlay.
+Theme tokens are in `src/theme/index.tsx`. Manrope is bundled for the React Native UI and the
+native overlay.
 
 ---
 
@@ -110,34 +157,48 @@ PauseLoop is designed to work entirely on-device:
 
 - Reads **package and activity metadata only** through Usage Access.
 - Never reads messages, titles, URLs, screen contents, or Accessibility input.
-- Does **not** request `QUERY_ALL_PACKAGES`, Accessibility, or screen capture.
-- Production builds ship without the Internet permission, and no profile requests storage or vibration permissions.
-- No analytics, ads, crash-reporting SDKs, accounts, or backend in Phase 0.
-- Usage history is not persisted in Phase 0; only `monitoringEnabled` is stored in `SharedPreferences`.
+- Does **not** request `QUERY_ALL_PACKAGES`, Accessibility, screen capture, notification-listener,
+  or Device Admin access.
+- Production builds ship without the Internet permission; no profile requests storage or vibration
+  permissions.
+- No analytics, ads, crash-reporting SDKs, accounts, or backend.
+- Phase 1 stores **90-day local aggregates** for selected apps: package name, local date, and
+  monitored duration. It does not store per-app timelines, titles, URLs, or content. Settings and
+  session state are stored in `SharedPreferences`; history can be cleared from the Privacy & data
+  screen.
+- The web preview uses an in-memory mock and does not read real usage data.
 
-The Play Console will still require declarations for Usage Access, Display over other apps, and the `specialUse` foreground service before release. Those are documented in the handoff.
+The Play Console will still require declarations for Usage Access, Display over other apps, and the
+`specialUse` foreground service before release.
 
 ---
 
 ## Documentation
 
-- [Phase 0 results and device test template](./docs/phase-0-results.md) — fill this in after the EAS build.
-- [Implementation handoff](./docs/PAUSELOOP-HANDOFF.md) — authoritative Phase 0 scope, native details, test matrix, and gate.
+- [Phase 1 results](./docs/phase-1-results.md) — implementation report, test evidence, deviations,
+  and the pending device checklist. Historical report; current HEAD may not contain the full
+  implementation.
+- [Phase 0 results](./docs/phase-0-results.md) — historical Phase 0 gate record; superseded by
+  Phase 1.
 - [Manrope OFL license](./docs/licenses/Manrope-OFL.txt)
 
 ---
 
-## Phase 0 gate
+## Current status and next steps
 
-Do not begin Phase 1 UI until all of the following are true on the real device:
+1. Complete the physical-device acceptance checklist in
+   [docs/phase-1-results.md](./docs/phase-1-results.md).
+2. Resolve the Expo SDK patch-version drift reported by `npx expo-doctor` (the installed packages
+   are older than the latest SDK 58 patches).
+3. Replace the local development signing key with a distribution key before any Play upload.
+4. If development builds are needed again, re-add `expo-dev-client` and update the `development`
+   EAS profile.
 
-- Development build installs and launches.
-- Usage Access grants and is detected.
-- The native test overlay appears over another app and behaves correctly.
-- The foreground service survives backgrounding and has a visible, quiet notification.
-- Launcher apps load without `QUERY_ALL_PACKAGES`.
-- No Accessibility or screen-capture permission is present.
-- The YouTube home/watch/Shorts activity spike is recorded with a fallback decision.
-- `docs/phase-0-results.md` records pass/fail and any deviations.
+---
 
-The next action is to run the EAS development build, install it on the OnePlus, and complete the test matrix.
+## License
+
+PauseLoop is proprietary software. All rights reserved. See [LICENSE](./LICENSE).
+
+The Manrope font is licensed under the SIL Open Font License; see
+[docs/licenses/Manrope-OFL.txt](./docs/licenses/Manrope-OFL.txt).

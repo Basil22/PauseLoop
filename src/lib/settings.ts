@@ -4,7 +4,6 @@ export const MIN_REMINDER_INTERVAL_MINUTES = 1;
 export const MAX_REMINDER_INTERVAL_MINUTES = 120;
 export const DEFAULT_REMINDER_INTERVAL_MINUTES = 5;
 export const MAX_TARGET_PACKAGES = 250;
-export const RETENTION_DAYS = 90;
 
 /**
  * These are deliberately broad package checks rather than a hard-coded list of

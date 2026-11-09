@@ -1,6 +1,0 @@
-expo.modules.pauseloopnative
-drawable ic_stat_pauseloop
-font manrope_bold
-font manrope_extrabold
-font manrope_regular
-font manrope_semibold

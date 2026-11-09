@@ -1,5 +1,7 @@
 # Phase 0 — Results and Device Test Record
 
+> **Historical report.** Phase 1 supersedes the limits described here. In particular, Phase 1 stores 90-day local usage aggregates; the "no persistence" statements below apply only to Phase 0. The Phase 0 gate is retained as a record and is no longer a prerequisite for Phase 1 work.
+
 **Status:** Implementation complete · **Device validation pending**
 **Last updated:** 2026-10-24
 **Build under test:** _not built yet_

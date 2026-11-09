@@ -16,7 +16,9 @@ export function useSession(active = true) {
   const mounted = useRef(true);
   const inFlight = useRef(false);
   const activeRef = useRef(active);
-  activeRef.current = active;
+  useEffect(() => {
+    activeRef.current = active;
+  }, [active]);
 
   const refresh = useCallback(async () => {
     if (inFlight.current) return;

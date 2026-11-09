@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="expo.modules.pauseloopnative.SessionEngineTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-11-08T06:57:17.313Z" hostname="HP15" time="0.105">
+<testsuite name="expo.modules.pauseloopnative.SessionEngineTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-11-09T09:15:21.288Z" hostname="HP15" time="0.105">
   <properties/>
-  <testcase name="restoreDropsSessionsAfterRebootAndExpiredCooldowns" classname="expo.modules.pauseloopnative.SessionEngineTest" time="0.054"/>
-  <testcase name="cooldownExpiryStartsARealFreshSession" classname="expo.modules.pauseloopnative.SessionEngineTest" time="0.007"/>
+  <testcase name="restoreDropsSessionsAfterRebootAndExpiredCooldowns" classname="expo.modules.pauseloopnative.SessionEngineTest" time="0.078"/>
+  <testcase name="cooldownExpiryStartsARealFreshSession" classname="expo.modules.pauseloopnative.SessionEngineTest" time="0.01"/>
   <testcase name="closingCooldownDoesNotShortenTheSharedWait" classname="expo.modules.pauseloopnative.SessionEngineTest" time="0.001"/>
   <testcase name="switchingBetweenSelectedAppsContinuesTheSameSession" classname="expo.modules.pauseloopnative.SessionEngineTest" time="0.003"/>
   <testcase name="accumulatesOnlyWhileSelectedAppIsInteractive" classname="expo.modules.pauseloopnative.SessionEngineTest" time="0.001"/>
@@ -10,10 +10,10 @@
   <testcase name="closeStartsSharedCooldownAndReopeningAnySelectedAppShowsCountdown" classname="expo.modules.pauseloopnative.SessionEngineTest" time="0.001"/>
   <testcase name="changingTheIntervalStartsAFreshSession" classname="expo.modules.pauseloopnative.SessionEngineTest" time="0.001"/>
   <testcase name="overlayFailureClearsTheBeliefThatTheOverlayIsVisible" classname="expo.modules.pauseloopnative.SessionEngineTest" time="0.0"/>
-  <testcase name="snoozeExpiringWhileAwayArmsAReminderForReturn" classname="expo.modules.pauseloopnative.SessionEngineTest" time="0.0"/>
+  <testcase name="snoozeExpiringWhileAwayArmsAReminderForReturn" classname="expo.modules.pauseloopnative.SessionEngineTest" time="0.001"/>
   <testcase name="aLongDelayedPollIsClampedInsteadOfCountingServiceDowntime" classname="expo.modules.pauseloopnative.SessionEngineTest" time="0.0"/>
-  <testcase name="fiveContinuousMinutesAwayResetsTheSessionAndSnoozes" classname="expo.modules.pauseloopnative.SessionEngineTest" time="0.0"/>
-  <testcase name="leavingTheAppDuringAReminderStartsCooldownButLockingOnlyHidesIt" classname="expo.modules.pauseloopnative.SessionEngineTest" time="0.001"/>
+  <testcase name="fiveContinuousMinutesAwayResetsTheSessionAndSnoozes" classname="expo.modules.pauseloopnative.SessionEngineTest" time="0.001"/>
+  <testcase name="leavingTheAppDuringAReminderStartsCooldownButLockingOnlyHidesIt" classname="expo.modules.pauseloopnative.SessionEngineTest" time="0.0"/>
   <testcase name="snoozeHidesForFiveMinutesThenRearmsWithOneLeft" classname="expo.modules.pauseloopnative.SessionEngineTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
